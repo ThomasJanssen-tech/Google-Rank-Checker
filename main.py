@@ -6,13 +6,27 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import pandas as pd
 import datetime
+import gspread
+from google.oauth2.service_account import Credentials
 
 load_dotenv()
 
-df = pd.read_csv('keywords.csv')
+scopes = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
+]
 
-# fetch the keywords from the CSV file
-keywords = df.columns
+credentials = Credentials.from_service_account_file(
+    'credentials.json',
+    scopes=scopes
+)
+
+gc = gspread.authorize(credentials)
+
+sh = gc.open_by_key(os.getenv("GOOGLE_SHEET_ID"))
+worksheet = sh.sheet1
+
+keywords = worksheet.row_values(1)
 
 i = 1
 
@@ -78,13 +92,6 @@ while(i < len(keywords)):
 
     i += 1
 
+worksheet.append_row(keyword_positions)
 
 
-
-
-df2 = pd.DataFrame([keyword_positions],columns=keywords)
-
-
-df_result = pd.concat([df, df2])
-
-df_result.to_csv('keywords.csv', index=False)
