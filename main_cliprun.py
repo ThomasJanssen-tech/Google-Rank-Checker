@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import datetime
 import gspread
+import json
 from google.oauth2.service_account import Credentials
 
 load_dotenv()
@@ -14,8 +15,8 @@ scopes = [
     'https://www.googleapis.com/auth/drive'
 ]
 
-credentials = Credentials.from_service_account_file(
-    'credentials.json',
+credentials = Credentials.from_service_account_info(
+    json.loads(os.getenv('GOOGLE_SERVICE_ACCOUNT_CREDENTIALS')),
     scopes=scopes
 )
 
