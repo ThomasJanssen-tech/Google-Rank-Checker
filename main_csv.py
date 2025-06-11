@@ -1,31 +1,18 @@
 import requests
+import json
 import os
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 import urllib.parse
+import pandas as pd
 import datetime
-import gspread
-import json
-from google.oauth2.service_account import Credentials
 
 load_dotenv()
 
-scopes = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive'
-]
+df = pd.read_csv('keywords.csv')
 
-credentials = Credentials.from_service_account_info(
-    json.loads(os.getenv('GOOGLE_SERVICE_ACCOUNT_CREDENTIALS')),
-    scopes=scopes
-)
-
-gc = gspread.authorize(credentials)
-
-sh = gc.open_by_key(os.getenv("GOOGLE_SHEET_ID"))
-worksheet = sh.sheet1
-
-keywords = worksheet.row_values(1)
+# fetch the keywords from the CSV file
+keywords = df.columns
 
 i = 1
 
@@ -73,7 +60,7 @@ while(i < len(keywords)):
             if(result.parent.has_attr('href')):
                 title = str(result.parent['href'])
 
-                #print(title)
+                print(title)
 
                 if(os.environ.get('WEBSITE_URL') in title):
                     position = count
@@ -84,14 +71,19 @@ while(i < len(keywords)):
 
         page += 1
 
+        # adding the position of the keyword to the list
+        print(f"Keyword: {keyword}, Position: {position}")
 
-
-    # adding the position of the keyword to the list
     keyword_positions.append(position)
-    print(f"Keyword: {keyword}, Position: {position}")
 
     i += 1
 
-worksheet.append_row(keyword_positions)
 
 
+
+
+df2 = pd.DataFrame([keyword_positions],columns=keywords)
+
+
+df_result = pd.concat([df, df2])
+df_result.to_csv('keywords.csv', index=False)

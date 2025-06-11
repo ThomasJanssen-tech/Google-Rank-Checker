@@ -49,7 +49,7 @@ while(i < len(keywords)):
     while page <= 5 and continue_loop:
 
         data = {
-            "zone": "serp_api1",
+            "zone": "serp_api",
             "url": "https://www.google.com/search?q="+urllib.parse.quote_plus(keyword)+"&start="+str((page-1)*10),
             "format": "raw",
             "country": os.getenv("GOOGLE_COUNTRY"),
