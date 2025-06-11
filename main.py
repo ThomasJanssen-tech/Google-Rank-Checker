@@ -83,9 +83,11 @@ while(i < len(keywords)):
 
         page += 1
 
-        # adding the position of the keyword to the list
-        print(f"Keyword: {keyword}, Position: {position}")
 
+
+    # adding the position of the keyword to the list
+    keyword_positions.append(position)
+    print(f"Keyword: {keyword}, Position: {position}")
 
     i += 1
 
