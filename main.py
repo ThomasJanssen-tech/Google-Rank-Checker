@@ -1,10 +1,8 @@
 import requests
-import json
 import os
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 import urllib.parse
-import pandas as pd
 import datetime
 import gspread
 from google.oauth2.service_account import Credentials
@@ -74,7 +72,7 @@ while(i < len(keywords)):
             if(result.parent.has_attr('href')):
                 title = str(result.parent['href'])
 
-                print(title)
+                #print(title)
 
                 if(os.environ.get('WEBSITE_URL') in title):
                     position = count
@@ -88,7 +86,6 @@ while(i < len(keywords)):
         # adding the position of the keyword to the list
         print(f"Keyword: {keyword}, Position: {position}")
 
-    keyword_positions.append(position)
 
     i += 1
 
