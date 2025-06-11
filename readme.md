@@ -47,7 +47,7 @@ pip install -r requirements.txt
 <li>Add your Bright Data API key</li>
 <li>Add GOOGLE_COUNTRY (e.g. US or NL) in the .env file to indicate in which country you want to check results</li>
 <li>Add WEBSITE_URL (e.g. pizzahut.com) in the .env file to indicate for which website you want to check results</li>
-<li>Get your Google Service account here: http://gspread.readthedocs.org/en/latest/oauth2.html</li>
+<li>Get your Google Service account here: https://console.developers.google.com/</li>
 <li>Rename the file with credentials to credentials.json and store it in the same folder</li>
 </ul>
 
