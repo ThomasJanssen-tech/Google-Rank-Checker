@@ -62,7 +62,7 @@ python main_csv.py
 - In VS Code (local) if you want to save to Gsheet:
 
 ```
-python main_csv.py
+python main.py
 ```
 
 - In Cliprun (cloud) save to Gsheet:
