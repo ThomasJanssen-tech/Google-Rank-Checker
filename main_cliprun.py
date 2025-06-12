@@ -16,7 +16,7 @@ scopes = [
 ]
 
 credentials = Credentials.from_service_account_info(
-    json.loads(os.getenv('GOOGLE_SERVICE_ACCOUNT_CREDENTIALS')),
+    json.loads(os.getenv('GOOGLE_SERVICE_ACCOUNT_JSON')),
     scopes=scopes
 )
 

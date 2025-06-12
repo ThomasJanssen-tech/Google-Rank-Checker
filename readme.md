@@ -53,12 +53,22 @@ pip install -r requirements.txt
 
 <h2>Executing the scripts</h2>
 
-- Open a terminal in VS Code
-
-- Execute the following command:
+- In VS Code (local) if you want to save in a CSV file:
 
 ```
-python main.py
+python main_csv.py
+```
+
+- In VS Code (local) if you want to save to Gsheet:
+
+```
+python main_csv.py
+```
+
+- In Cliprun (cloud) save to Gsheet:
+
+```
+python main_cliprun.py
 ```
 
 <h2>Further reading:</h2>
